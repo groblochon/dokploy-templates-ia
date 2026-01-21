@@ -1,0 +1,327 @@
+# =============================================================================
+# 🚀 STACK IA OPTIMISÉE POUR DOKPLOY - Configuration
+# =============================================================================
+# Mutualisation maximale : Supabase, S3 Infomaniak, OpenAI Infomaniak
+# Domaines : https://{{serviceName}}.ai.nos.bzh
+# =============================================================================
+
+[variables]
+# Domaine principal
+main_domain = "${domain}"
+
+# ============================================================================
+# 🔐 SECRETS GÉNÉRÉS AUTOMATIQUEMENT
+# ============================================================================
+postgres_password = "${password:32}"
+jwt_secret = "${base64:64}"
+secret_key_base = "${base64:64}"
+anon_key = "${base64:32}"
+service_role_key = "${base64:32}"
+logflare_api_key = "${base64:32}"
+nextauth_secret = "${base64:32}"
+meili_master_key = "${password:32}"
+webui_secret_key = "${base64:32}"
+flowise_secret_key = "${password:32}"
+flowise_passphrase = "${password:16}"
+dify_secret_key = "${base64:32}"
+drone_rpc_secret = "${base64:32}"
+vault_enc_key = "${base64:32}"
+surreal_password = "${password:16}"
+grafana_admin_password = "${password:16}"
+admin_password = "${password:16}"
+dashboard_password = "${password:16}"
+huly_secret = "${base64:32}"
+hoppscotch_encryption_key = "${base64:32}"
+docmost_secret = "${base64:32}"
+umami_secret = "${base64:32}"
+glean_secret_key = "${base64:32}"
+milvus_minio_access_key = "${password:16}"
+milvus_minio_secret_key = "${password:32}"
+
+# ============================================================================
+# 🌐 DOMAINES DES SERVICES
+# ============================================================================
+
+[config]
+[[config.domains]]
+serviceName = "supabase-studio"
+port = 3000
+host = "supabase.${main_domain}"
+
+[[config.domains]]
+serviceName = "supabase-kong"
+port = 8000
+host = "api.${main_domain}"
+
+[[config.domains]]
+serviceName = "open-webui"
+port = 8080
+host = "openwebui.${main_domain}"
+
+[[config.domains]]
+serviceName = "n8n"
+port = 5678
+host = "n8n.${main_domain}"
+
+[[config.domains]]
+serviceName = "flowise"
+port = 3000
+host = "flowise.${main_domain}"
+
+[[config.domains]]
+serviceName = "anythingllm"
+port = 3001
+host = "anythingllm.${main_domain}"
+
+[[config.domains]]
+serviceName = "crawl4ai"
+port = 11235
+host = "crawl4ai.${main_domain}"
+
+[[config.domains]]
+serviceName = "archon"
+port = 8080
+host = "archon.${main_domain}"
+
+[[config.domains]]
+serviceName = "dify-web"
+port = 3000
+host = "dify.${main_domain}"
+
+[[config.domains]]
+serviceName = "localai"
+port = 8080
+host = "localai.${main_domain}"
+
+[[config.domains]]
+serviceName = "langserve"
+port = 8000
+host = "langserve.${main_domain}"
+
+[[config.domains]]
+serviceName = "freshrss"
+port = 80
+host = "freshrss.${main_domain}"
+
+[[config.domains]]
+serviceName = "karakeep"
+port = 3000
+host = "karakeep.${main_domain}"
+
+[[config.domains]]
+serviceName = "linkwarden"
+port = 3000
+host = "linkwarden.${main_domain}"
+
+[[config.domains]]
+serviceName = "vaultwarden"
+port = 80
+host = "vaultwarden.${main_domain}"
+
+[[config.domains]]
+serviceName = "baserow"
+port = 80
+host = "baserow.${main_domain}"
+
+[[config.domains]]
+serviceName = "open-notebook"
+port = 8502
+host = "notebook.${main_domain}"
+
+[[config.domains]]
+serviceName = "grafana"
+port = 3000
+host = "grafana.${main_domain}"
+
+[[config.domains]]
+serviceName = "drone-server"
+port = 80
+host = "drone.${main_domain}"
+
+[[config.domains]]
+serviceName = "kokoro-tts"
+port = 8880
+host = "tts.${main_domain}"
+
+[[config.domains]]
+serviceName = "whisper"
+port = 9000
+host = "stt.${main_domain}"
+
+[[config.domains]]
+serviceName = "librechat"
+port = 3080
+host = "chat.${main_domain}"
+
+[[config.domains]]
+serviceName = "meilisearch"
+port = 7700
+host = "search.${main_domain}"
+
+[[config.domains]]
+serviceName = "gitea"
+port = 3000
+host = "git.${main_domain}"
+
+[[config.domains]]
+serviceName = "hoppscotch"
+port = 80
+host = "hoppscotch.${main_domain}"
+
+[[config.domains]]
+serviceName = "huly-front"
+port = 8080
+host = "huly.${main_domain}"
+
+[[config.domains]]
+serviceName = "nextcloud"
+port = 80
+host = "nextcloud.${main_domain}"
+
+[[config.domains]]
+serviceName = "uptime-kuma"
+port = 3001
+host = "uptime.${main_domain}"
+
+[[config.domains]]
+serviceName = "it-tools"
+port = 80
+host = "tools.${main_domain}"
+
+[[config.domains]]
+serviceName = "excalidraw"
+port = 80
+host = "draw.${main_domain}"
+
+[[config.domains]]
+serviceName = "docmost"
+port = 3000
+host = "docs.${main_domain}"
+
+[[config.domains]]
+serviceName = "umami"
+port = 3000
+host = "analytics.${main_domain}"
+
+[[config.domains]]
+serviceName = "stirling-pdf"
+port = 8080
+host = "pdf.${main_domain}"
+
+[[config.domains]]
+serviceName = "changedetection"
+port = 5000
+host = "changes.${main_domain}"
+
+[[config.domains]]
+serviceName = "glean-web"
+port = 80
+host = "glean.${main_domain}"
+
+[[config.domains]]
+serviceName = "glean-admin"
+port = 80
+host = "glean-admin.${main_domain}"
+
+[config.env]
+S3_ENDPOINT = "https://s3.pub1.infomaniak.cloud"
+S3_REGION = "eu-west-1"
+S3_BUCKET = "dokploy"
+S3_ACCESS_KEY_ID = "${{project.S3_ACCESS_KEY_ID}}"
+S3_SECRET_ACCESS_KEY = "${{project.S3_SECRET_ACCESS_KEY}}"
+INFOMANIAK_PROJECT_ID = "${{project.INFOMANIAK_PROJECT_ID}}"
+OPENAI_API_BASE = "https://api.infomaniak.com/2/ai/${INFOMANIAK_PROJECT_ID}/openai/v1"
+OPENAI_API_KEY = "${{project.OPENAI_API_KEY}}"
+POSTGRES_PASSWORD = "${postgres_password}"
+POSTGRES_DB = "postgres"
+JWT_SECRET = "${jwt_secret}"
+SECRET_KEY_BASE = "${secret_key_base}"
+VAULT_ENC_KEY = "${vault_enc_key}"
+ANON_KEY = "${anon_key}"
+SERVICE_ROLE_KEY = "${service_role_key}"
+LOGFLARE_API_KEY = "${logflare_api_key}"
+PGRST_DB_SCHEMAS = "public,storage,graphql_public"
+SUPABASE_PUBLIC_URL = "https://api.${main_domain}"
+API_EXTERNAL_URL = "https://api.${main_domain}"
+SITE_URL = "https://${main_domain}"
+DASHBOARD_USERNAME = "admin"
+DASHBOARD_PASSWORD = "${dashboard_password}"
+STUDIO_DEFAULT_ORGANIZATION = "IA Stack"
+STUDIO_DEFAULT_PROJECT = "ia-stack"
+STORAGE_BACKEND = "s3"
+
+[[config.mounts]]
+volumeName = "supabase-db-data"
+mountPath = "/var/lib/postgresql/data"
+
+[[config.mounts]]
+volumeName = "supabase-storage-data"
+mountPath = "/var/lib/storage"
+
+[[config.mounts]]
+volumeName = "open-webui-data"
+mountPath = "/app/backend/data"
+
+[[config.mounts]]
+volumeName = "n8n-data"
+mountPath = "/home/node/.n8n"
+
+[[config.mounts]]
+volumeName = "flowise-data"
+mountPath = "/root/.flowise"
+
+[[config.mounts]]
+volumeName = "anythingllm-data"
+mountPath = "/app/server/storage"
+
+[[config.mounts]]
+volumeName = "freshrss-data"
+mountPath = "/var/www/FreshRSS/data"
+
+[[config.mounts]]
+volumeName = "karakeep-data"
+mountPath = "/data"
+
+[[config.mounts]]
+volumeName = "linkwarden-data"
+mountPath = "/data/data"
+
+[[config.mounts]]
+volumeName = "vaultwarden-data"
+mountPath = "/data"
+
+[[config.mounts]]
+volumeName = "baserow-data"
+mountPath = "/baserow/data"
+
+[[config.mounts]]
+volumeName = "grafana-data"
+mountPath = "/var/lib/grafana"
+
+[[config.mounts]]
+volumeName = "drone-data"
+mountPath = "/data"
+
+[[config.mounts]]
+volumeName = "meilisearch-data"
+mountPath = "/meili_data"
+
+[[config.mounts]]
+volumeName = "redis-data"
+mountPath = "/data"
+
+[[config.mounts]]
+volumeName = "glean-logs"
+mountPath = "/app/logs"
+
+[[config.mounts]]
+volumeName = "milvus-etcd-data"
+mountPath = "/etcd"
+
+[[config.mounts]]
+volumeName = "milvus-minio-data"
+mountPath = "/minio_data"
+
+[[config.mounts]]
+volumeName = "milvus-data"
+mountPath = "/var/lib/milvus"

@@ -1,0 +1,18 @@
+{
+  "name": "dokploy-templates-ia",
+  "version": "1.0.0",
+  "templates": [
+    {
+      "name": "base-stack",
+      "title": "Base stack (Supabase, Redis, S3)",
+      "description": "Socle mutualisé pour la stack IA: Supabase, Redis, MinIO/S3-compatible (Infomaniak).",
+      "path": "blueprints/base-stack"
+    },
+    {
+      "name": "ia-stack",
+      "title": "IA stack complète",
+      "description": "Stack IA complète regroupant les services fournis (OpenWebUI, Flowise, Dify, etc.).",
+      "path": "blueprints/ia-stack"
+    }
+  ]
+}

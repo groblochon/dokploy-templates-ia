@@ -1,0 +1,61 @@
+# Base-stack template for Dokploy - mutualised Supabase, Redis and S3 (Infomaniak)
+
+[variables]
+main_domain = "${domain}"
+
+# Secrets
+postgres_password = "${password:32}"
+jwt_secret = "${base64:64}"
+anon_key = "${base64:32}"
+service_role_key = "${base64:32}"
+
+[config]
+[[config.domains]]
+serviceName = "supabase"
+port = 5432
+host = "db.${main_domain}"
+
+[[config.domains]]
+serviceName = "redis"
+port = 6379
+host = "redis.${main_domain}"
+
+[[config.domains]]
+serviceName = "minio"
+port = 9000
+host = "minio.${main_domain}"
+
+[config.env]
+# S3 Infomaniak - expected to be provided in project variables
+S3_ENDPOINT = "https://s3.pub1.infomaniak.cloud"
+S3_REGION = "eu-west-1"
+S3_BUCKET = "dokploy"
+S3_ACCESS_KEY_ID = "${{project.S3_ACCESS_KEY_ID}}"
+S3_SECRET_ACCESS_KEY = "${{project.S3_SECRET_ACCESS_KEY}}"
+
+# OpenAI Infomaniak
+INFOMANIAK_PROJECT_ID = "${{project.INFOMANIAK_PROJECT_ID}}"
+OPENAI_API_BASE = "https://api.infomaniak.com/2/ai/${INFOMANIAK_PROJECT_ID}/openai/v1"
+OPENAI_API_KEY = "${{project.OPENAI_API_KEY}}"
+
+# Supabase
+POSTGRES_PASSWORD = "${postgres_password}"
+JWT_SECRET = "${jwt_secret}"
+ANON_KEY = "${anon_key}"
+SERVICE_ROLE_KEY = "${service_role_key}"
+SUPABASE_PUBLIC_URL = "https://api.${main_domain}"
+API_EXTERNAL_URL = "https://api.${main_domain}"
+SITE_URL = "https://${main_domain}"
+STORAGE_BACKEND = "s3"
+
+[[config.mounts]]
+volumeName = "supabase-db-data"
+mountPath = "/var/lib/postgresql/data"
+
+[[config.mounts]]
+volumeName = "supabase-storage-data"
+mountPath = "/var/lib/storage"
+
+[[config.mounts]]
+volumeName = "redis-data"
+mountPath = "/data"
